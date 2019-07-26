@@ -23,20 +23,22 @@ def GetFullPathFiles(rootpath):
     """Get all the files into a list."""
     fullpathfiles = list()
     for root, _, filenames in os.walk(rootpath):
-        abs_dir = os.path.abspath(root)
+        rel_dir = os.path.relpath(root, rootpath)
         for filename in filenames:
-            fullness = f"file:/{os.path.join(abs_dir, filename)}"
-            fullpathfiles.append(fullness)
+            fullpathfiles.append(os.path.join(rel_dir, filename))
     return fullpathfiles
 
 
-def GetDevices(pathlist):
+def GetDevices(pathlist, rootpath):
     """Get unique device ids as keys in default dictionary."""
     deviceiddict = defaultdict(list)
+    abs_dir = os.path.abspath(rootpath)
     for fullpath in pathlist:
         pathchunks = Path(fullpath).parts
         if len(pathchunks) > 3:
-            deviceiddict[pathchunks[3]].append(fullpath)
+            absfull = os.path.join(abs_dir, fullpath)
+            absfullfinal = f"file:/{absfull}"
+            deviceiddict[pathchunks[3]].append(absfullfinal)
     return deviceiddict
 
 
