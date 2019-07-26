@@ -1,6 +1,5 @@
 from setuptools import setup
 import re
-import py2exe
 
 version = re.search(
     r'^__version__\s*=\s*"(.*)"',
@@ -32,6 +31,5 @@ setup(
     },
     url='https://github.com/jamesacampbell/folders2json',
     download_url=f'https://github.com/\
-        jamesacampbell/folders2json/archive/{version}.tar.gz',
-    console='folders2json=folders2json.folders2json:main'
+        jamesacampbell/folders2json/archive/{version}.tar.gz'
 )
