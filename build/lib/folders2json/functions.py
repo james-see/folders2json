@@ -27,6 +27,7 @@ def GetFullPathFiles(rootpath):
         for filename in filenames:
             fullness = f"file:/{os.path.join(abs_dir, filename)}"
             fullpathfiles.append(fullness)
+    print(fullpathfiles)
     return fullpathfiles
 
 
