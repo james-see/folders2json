@@ -8,7 +8,7 @@ def main():
     args = prep()  # get rootpath
     fullnamefiles = GetFullPathFiles(args.rootpath)  # get relative path files
     devices = GetDevices(fullnamefiles, args.rootpath)  # get devices for json
-    GenerateJson(devices, args.windows, args.rootpath)  # generate json file for each
+    GenerateJson(devices, args.windows, fullnamefiles)  # generate json file for each
 
 
 if __name__ == "__main__":

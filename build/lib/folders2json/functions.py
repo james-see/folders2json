@@ -31,7 +31,7 @@ def GetFullPathFiles(rootpath):
     return fullpathfiles
 
 
-def GetDevices(pathlist, rootpath, win):
+def GetDevices(pathlist, rootpath):
     """Get unique device ids as keys in default dictionary."""
     deviceiddict = defaultdict(list)
     abs_dir = os.path.abspath(rootpath)
@@ -39,20 +39,23 @@ def GetDevices(pathlist, rootpath, win):
         pathchunks = Path(fullpath).parts
         if len(pathchunks) > 3:
             absfull = os.path.join(abs_dir, fullpath)
-            if win:
-                absfullfinal = f"file://{absfull}"
-            else:
-                absfullfinal = f"file:/{absfull}"
-            deviceiddict[pathchunks[3]].append(absfullfinal)
+            deviceiddict[pathchunks[3]].append(absfull)
     return deviceiddict
 
 
-def GenerateJson(deviceiddict):
+def GenerateJson(deviceiddict, win, fullpathfiles):
     """For each deviceid key, generate json."""
     finaldict = dict()
     for key, value in deviceiddict.items():
-        finaldict["urls"] = value
-        partsofpath = Path(value[0]).parts
+        absfullfinal = list()
+        if win:
+            for item in value:
+                absfullfinal.append(f"file://{item}")
+        else:
+            for item in value:
+                absfullfinal.append(f"file:/{item}")
+        finaldict["urls"] = absfullfinal
+        partsofpath = Path(fullpathfiles[0]).parts
         if len(partsofpath) > 3:
             finaldict["metadata"] = {
                 "objective": partsofpath[0],
