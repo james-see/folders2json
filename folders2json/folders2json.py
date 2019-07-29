@@ -1,6 +1,6 @@
 from .functions import GetFullPathFiles, GetDevices, GenerateJson, prep
 
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 
 
 def main():
@@ -12,4 +12,3 @@ def main():
 
 if __name__ == "__main__":
     main()
--c
