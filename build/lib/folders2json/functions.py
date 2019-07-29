@@ -15,7 +15,9 @@ def prep():
     parser.add_argument('-r', '--root', dest='rootpath',
                         help='Set the root path', default=currentdir,
                         required=False)
+    parser.add_argument('-w', '--windows', dest='windows', action='store_true', default=False, help='If you are using windows adds extra slash for file path.' )
     args = parser.parse_args()
+
     return args
 
 
@@ -29,7 +31,7 @@ def GetFullPathFiles(rootpath):
     return fullpathfiles
 
 
-def GetDevices(pathlist, rootpath):
+def GetDevices(pathlist, rootpath, win):
     """Get unique device ids as keys in default dictionary."""
     deviceiddict = defaultdict(list)
     abs_dir = os.path.abspath(rootpath)
@@ -37,7 +39,10 @@ def GetDevices(pathlist, rootpath):
         pathchunks = Path(fullpath).parts
         if len(pathchunks) > 3:
             absfull = os.path.join(abs_dir, fullpath)
-            absfullfinal = f"file:/{absfull}"
+            if win:
+                absfullfinal = f"file://{absfull}"
+            else:
+                absfullfinal = f"file:/{absfull}"
             deviceiddict[pathchunks[3]].append(absfullfinal)
     return deviceiddict
 
