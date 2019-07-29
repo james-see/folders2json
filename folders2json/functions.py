@@ -18,8 +18,8 @@ def prep(version):
                         required=False)
     parser.add_argument('-w', '--windows', dest='windows', action='store_true',
                         default=False, help='Adds extra slash for file path.')
-    parser.add_argument('-v', '--version', dest="version",
-                        help='Prints out the current version')
+    parser.add_argument('--version', '-V', action='version',
+                        version="%(prog)s " + version)
     args = parser.parse_args()
 
     return args

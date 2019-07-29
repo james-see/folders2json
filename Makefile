@@ -1,16 +1,13 @@
 #!/bin/bash
-DEBUG = 0;
-
 all: clean release
 
 release:
-	rm -rf dist build
-	if '[ -f setup.py ]'; then
-		echo "File not found!"
-	else
-	python3 setup.py sdist bdist_wheel
-	fi
-	twine upload dist/* --verbose
+	@rm -rf dist build
+	@python3 setup.py sdist bdist_wheel
+	@echo "Build finished."
+	@echo "uploading to pypi..."
+	@twine upload dist/* --verbose
+
 
 clean:
 	@rm -rf dist build
