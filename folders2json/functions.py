@@ -63,5 +63,7 @@ def GenerateJson(deviceiddict, win, fullpathfiles):
                 "device": key
             }
         finaldict["params"] = {}
+        if os.path.exists(f"{key}.json"):
+            os.remove(f"{key}.json")
         with open(f"{key}.json", "w+") as f:
             f.write(json.dumps(finaldict))
