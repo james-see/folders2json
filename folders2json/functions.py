@@ -5,17 +5,21 @@ import json
 from collections import defaultdict
 import argparse
 
+
 currentdir = os.getcwd()
 
 
-def prep():
+def prep(version):
     """Get all the argparse stuff setup."""
     parser = argparse.ArgumentParser(description='simple generate json\
                                      for folder format')
     parser.add_argument('-r', '--root', dest='rootpath',
                         help='Set the root path', default=currentdir,
                         required=False)
-    parser.add_argument('-w', '--windows', dest='windows', action='store_true', default=False, help='If you are using windows adds extra slash for file path.' )
+    parser.add_argument('-w', '--windows', dest='windows', action='store_true',
+                        default=False, help='Adds extra slash for file path.')
+    parser.add_argument('-v', '--version', dest="version",
+                        help='Prints out the current version')
     args = parser.parse_args()
 
     return args
