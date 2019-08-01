@@ -1,6 +1,6 @@
 from .functions import GetFullPathFiles, GetDevices, GenerateJson, prep
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 
 def main():

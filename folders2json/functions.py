@@ -59,19 +59,17 @@ def GenerateJson(deviceiddict, win, fullpathfiles):
             for item in value:
                 absfullfinal.append(f"file:/{item}")
         finaldict["urls"] = absfullfinal
-        partsofpath = Path(fullpathfiles[0]).parts
-        if len(partsofpath) > 3:
-            finaldict["metadata"] = {
-                "objective": partsofpath[0],
-                "batch": partsofpath[1],
-                "device": key
-            }
-        else:
-            finaldict["metadata"] = {
-                "objective": Path(fullpathfiles[1]).parts[0],
-                "batch": Path(fullpathfiles[1]).parts[1],
-                "device": key
-            }
+        for pathitem in fullpathfiles:
+            partsofpath = Path(pathitem).parts
+            if len(partsofpath) > 3 and key in partsofpath:
+                finaldict["metadata"] = {
+                    "objective": partsofpath[0],
+                    "batch": partsofpath[1],
+                    "device": key
+                }
+                break
+            else:
+                continue
         finaldict["params"] = {}
         if os.path.exists(f"{key}.json"):
             os.remove(f"{key}.json")
