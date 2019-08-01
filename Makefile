@@ -12,7 +12,7 @@ release:
 clean:
 	@rm -rf dist build
 	@rm -rf *.egg-info
-	@echo "fresh and clean"
+	@echo "*****^^^***** fresh & clean *****^^^*****"
 
 test:
 	pytest
