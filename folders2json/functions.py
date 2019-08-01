@@ -68,8 +68,8 @@ def GenerateJson(deviceiddict, win, fullpathfiles):
             }
         else:
             finaldict["metadata"] = {
-                "objective": fullpathfiles[1].parts[0],
-                "batch": fullpathfiles[1].parts[1],
+                "objective": Path(fullpathfiles[1]).parts[0],
+                "batch": Path(fullpathfiles[1]).parts[1],
                 "device": key
             }
         finaldict["params"] = {}
