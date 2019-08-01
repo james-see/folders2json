@@ -66,6 +66,12 @@ def GenerateJson(deviceiddict, win, fullpathfiles):
                 "batch": partsofpath[1],
                 "device": key
             }
+        else:
+            finaldict["metadata"] = {
+                "objective": fullpathfiles[1].parts[0],
+                "batch": fullpathfiles[1].parts[1],
+                "device": key
+            }
         finaldict["params"] = {}
         if os.path.exists(f"{key}.json"):
             os.remove(f"{key}.json")
